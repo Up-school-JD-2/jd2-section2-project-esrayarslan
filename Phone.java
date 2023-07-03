@@ -1,5 +1,7 @@
-public class Phone {
+import java.io.PrintWriter;
+import java.util.Scanner;
 
+public class Phone {
     private String brand;
     private String model;
     private String serialNumber;
@@ -13,51 +15,35 @@ public class Phone {
         this.memorySpace = memorySpace;
         this.operatingSystem = operatingSystem;
     }
-    public void showPhoneInformation() {
-        System.out.println("Brand : " + brand);
-        System.out.println("Model : " + model);
-        System.out.println("Serial Number : " + serialNumber);
-        System.out.println("Memory Space : " + memorySpace + " GB");
-        System.out.println("Operating System : " + operatingSystem);
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
     public int getMemorySpace() {
         return memorySpace;
     }
-
-    public void setMemorySpace(int memorySpace) {
-        this.memorySpace = memorySpace;
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "Brand='" + brand + '\'' +
+                ", Model='" + model + '\'' +
+                ", SerialNumber='" + serialNumber + '\'' +
+                ", MemorySpace=" + memorySpace +
+                ", OperatingSystem='" + operatingSystem + '\'' +
+                '}';
     }
 
-    public String getOperatingSystem() {
-        return operatingSystem;
+    public void save(PrintWriter writer) {
+        writer.println(brand);
+        writer.println(model);
+        writer.println(serialNumber);
+        writer.println(memorySpace);
+        writer.println(operatingSystem);
     }
 
-    public void setOperatingSystem(String operatingSystem) {
-        this.operatingSystem = operatingSystem;
+    public static Phone load(Scanner scanner) {
+        String brand = scanner.nextLine();
+        String model = scanner.nextLine();
+        String serialNumber = scanner.nextLine();
+        int memorySpace = Integer.parseInt(scanner.nextLine());
+        String operatingSystem = scanner.nextLine();
+
+        return new Phone(brand, model, serialNumber, memorySpace, operatingSystem);
     }
 }
